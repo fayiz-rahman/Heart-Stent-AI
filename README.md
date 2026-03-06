@@ -16,15 +16,16 @@ This script automates the conversion of raw simulation data into a deep-learning
     * For cases $0.24\text{mm}$ and $0.26\text{mm}$, it extracts solid elements using **Property ID 3**.
     * For all other cases ($0.28\text{mm}$ to $0.44\text{mm}$), it utilizes **Property ID 4**.
 * **Segmentation**: Generates 5 distinct PyTorch Geometric (`.pt`) files per simulation, representing vertical slices of the stent (0-20%, 20-40%, etc.).
-* **Output**: Extracts nodal coordinates, edge connectivity, Von Mises stress, and 3D displacement vectors.
+* **Output**: Extracts nodal coordinates, edge connectivity, Von Mises stress, and 3D displacement vectors. The folders Segment_0 to Segment_4 contain respectively the extracted data from the raw NASTRAN FEA data.
 
 
 
 ### 2. GNN Training (`HT_Partitioned Training_Displacement&Stress_0.2 to 1.py`)
-The training pipeline utilizes **SAGEConv (GraphSAGE)** layers to perform inductive learning on the mesh graphs.
+The training pipeline utilizes **SAGEConv (GraphSAGE)** layers to perform inductive learning on the mesh graphs.The files stent_gnn_multi_Segment_0.pth to stent_gnn_multi_Segment_4.pth are the models trained for each segment using a 256 hidden layer architecture.
 * **Why GraphSAGE?**: Unlike standard Graph Convolutional Networks (GCNs), GraphSAGE learns an aggregation function that generalizes to unseen topologies, making it ideal for predicting stress on stents with varying link lengths.
 * **Architecture**: A multi-target GNN that simultaneously predicts scalar stress and vector displacement.
 * **Scaling**: Features are standardized to millimeters to ensure numerical stability during the message-passing phase.
+  
 
 ### 3. Interactive Dashboard (`app_2.py`)
 A high-performance **Streamlit** application that acts as the primary interface for design exploration.
