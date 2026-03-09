@@ -32,6 +32,5 @@ A high-performance **Streamlit** application that acts as the primary interface 
 * **Segment Merging**: Dynamically loads and merges predictions from all 5 segment models into a unified 3D visualization.
 * **Visual Controls**: "Full Black" high-contrast UI with features including:
     * **Z-Axis Stretching**: Exaggerates vertical scaling to better inspect link length variations.
-    * **Peak Stress Marker**: Automatically locates and labels the node with the highest predicted stress.
-    * **Safety Factor Calculation**: Real-time evaluation against 316L Stainless Steel yield strength.
-
+    * **Display mode**: Display with or without mesh or in wireframe mode
+* **Displacement**: View the expanding of the link as an animation
